@@ -60,3 +60,11 @@ db.sqlite3
 /static
 .DS_Store`
 
+
+- Sprawdzenie zawartości, informację o wszystkich nieśledzonych/zmienionych/zaplanowanych do najbliższego commita plików, statusie brancha 
+za pomocą `git status` : 
+![Opis obrazu](status.png)
+
+- Zapisanie zmian za pomocą `git add --all` oraz `git commit -m "My Django Girls app, first commit"`
+
+
