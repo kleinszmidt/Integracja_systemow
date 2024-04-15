@@ -66,5 +66,35 @@ za pomocą `git status` :
 ![Opis obrazu](status.png)
 
 - Zapisanie zmian za pomocą `git add --all` oraz `git commit -m "My Django Girls app, first commit"`
+- Mój kod znajduję się już na GitHubie.
+- ### Wdrożenie aplikacji internetowej w PythonAnywhere
+`pip3.6 install --user pythonanywhere` w konsoli Bash, następnie 
+`pa_autoconfigure_django.py https://github.com/kleinszmidt/Integracja_systemow.git`
+
+- Zainicjowanie konta administratora- PythonAnywhere 
+`(dzuls.pythonanywhere.com) $ python manage.py createsuperuser`
+Sprawdzam swój kod za pomocą `ls` i wygląda następująco:
+![Opis obrazu](PythonAnywhere.png)
+
+- Moja strona jest dostępna pod adresem: https://dzuls.pythonanywhere.com/
+
+
+- Zaimportowanie URL-e z naszej aplikacji blog do głównego pliku mysite/urls.py.
+- Stworzenie nowego pustego pliku urlsy.py o treści: 
+```from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.post_list, name='post_list'),
+]
+```
+
+- Utworzenie view zgodnie z sugestiami komentarzy
+`def post_list(request):
+    return render(request, 'blog/post_list.html', {})`
+Po zapisaniu pliku i przejściu na adres:  http://127.0.0.1:8000/ wygląda tak: 
+
+![Opis obrazu](widok.png)
+
 
 
