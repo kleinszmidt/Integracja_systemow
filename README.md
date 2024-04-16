@@ -96,5 +96,36 @@ Po zapisaniu pliku i przejściu na adres:  http://127.0.0.1:8000/ wygląda tak:
 
 ![Opis obrazu](widok.png)
 
+- Utworzenie pliku z szablonem oraz wypełnienie go treścią:
+<html>
+<body>
+    <p>Hi there!</p>
+    <p>It works!</p>
+</body>
+</html> 
 
+- Dostosowywanie szablonu: 
+<html>
+    <head>
+        <title>Django Girls blog</title>
+    </head>
+    <body>
+        <div>
+            <h1><a href="/">Django Girls Blog</a></h1>
+        </div>
+        <div>
+            <p>published: 14.06.2014, 12:14</p>
+            <h2><a href="">My first post</a></h2>
+            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        </div>
+        <div>
+            <p>published: 14.06.2014, 12:14</p>
+            <h2><a href="">My second post</a></h2>
+            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut f.</p>
+        </div>
+    </body>
+</html>
+
+I widok strony jest następujący: 
+![Opis obrazu](html.png)
 
