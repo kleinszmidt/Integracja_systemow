@@ -164,5 +164,82 @@ tak to wygląda razem z nowym postem na liście:
 ```
 ![Opis obrazu](szablonu.png)
 
-- 
+- Instalacja bootstrapa- wprowadzenie do pliku .html 
+```
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> 
+```
+wygląda to tak: 
+![Opis obrazu](bootstrap.png)
+
+- Utworzenie folderu static oraz katalogu w nim css i uzupełnienie pliku blog.css
+kodem: 
+```
+h1 a, h2 a {
+    color: #C25100;
+}
+<a href="https://en.wikipedia.org/wiki/Django" class="external_link" id="link_to_wiki_page">
+```
+- aktualizacja .html informacją o dodaniu styli CSS
+![Opis obrazu](pomaranczowy.png) 
+
+- Po dodaniu klas oraz bloków deklaracji strona wygląda następująco:
+![Opis obrazu](gotowa.png) 
+- Tworzenie szablonu bazowego oraz aktualizacja post_list.html w stworzonym nowym pliku base.hmtl z kodem:
+````
+<body>
+    <div class="page-header">
+        <h1><a href="/">Django Girls Blog</a></h1>
+    </div>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+````
+- Po wpisaniu linijki kodu `<h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>`
+wyskoczył błąd :
+![Opis obrazu](blad.png) 
+
+- W pliku blog/urls.py stworzony adres URL
+```
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.post_list, name='post_list'),
+    path('post/<int:pk>/', views.post_detail, name='post_detail'),
+]
+```
+Taki błąd serwera występuje:
+![Opis obrazu](serwer.png) 
+
+- Plik views.py zaktualizowany natomiast po kliknięciu na link w tytule wpisu
+występuje błąd: 
+![Opis obrazu](bladTytul.png) 
+
+- Stworzenie szablonu dla jednego wpisu, w nowo stworzonym pliku post_detail.html
+dodany został następujący kod:
+```
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="post">
+        {% if post.published_date %}
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+        {% endif %}
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+{% endblock %}
+```
+teraz po kliknieciu w tytuł wpisu prawidłowo wyświetla się strona:
+![Opis obrazu](prawidlowyWpis.png) 
+
 
