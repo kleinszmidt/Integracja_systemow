@@ -135,3 +135,11 @@ wpisanie w terminalu Bash `cd ~/dzuls.pythonanywhere.com`
 i `git pull` wygląda tak: 
 ![Opis obrazu](dzuls.png)
 
+- W konsoli Django wpisanie polecenia `python manage.py shell`- przejście do 
+interaktywnej konsoli Django
+- Na początek spróbujmy wyświetlić wszystkie nasze wpisy- następującym poleceniem:
+`>>> Post.objects.all()` następnie importujemy "Post" 
+`from blog.models import Post` importujemy model Post z blog.models
+`Post.objects.all()` lista wpisów wygląda następująco: 
+![Opis obrazu](wpisy.png)
+- Tworzymy nowy obiekt Post w bazie danych: 
