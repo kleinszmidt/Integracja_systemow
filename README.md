@@ -242,4 +242,81 @@ dodany został następujący kod:
 teraz po kliknieciu w tytuł wpisu prawidłowo wyświetla się strona:
 ![Opis obrazu](prawidlowyWpis.png) 
 
+- Aktualizowanie plików statycznych na serwerze w bashu pythonanywhere
+` workon dzuls.pythonanywhere.com` i `python manage.py collectstatic`
+i moja strona wygląda tak:
+![Opis obrazu](rozbudowa.png) 
 
+- Utworzenie formularza z nowym wpisem- w pliku forms.py wpisujemy kod
+```
+from django import forms
+
+from .models import Post
+
+class PostForm(forms.ModelForm):
+
+    class Meta:
+        model = Post
+        fields = ('title', 'text',)
+```
+- dodanie odnośnika do strony z formularzem
+```
+{% load static %}
+<html>
+    <head>
+        <title>Django Girls blog</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    </head>
+    <body>
+        <div class="page-header">
+            <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+            <h1><a href="/">Django Girls Blog</a></h1>
+        </div>
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+```
+następnie dodanie URLS, stworzenie szablonu dla naszego formularza w pliku
+post_edit.html:
+```
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h2>New post</h2>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}
+```
+edycja views.py 
+```
+def post_new(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = PostForm()
+    return render(request, 'blog/post_edit.html', {'form': form})
+```
+tak się prezentuje wypelniony formularz 
+![Opis obrazu](formularz.png) 
+po zasafowaniu jak widac na ponizszym screenie jest możliwa edycja wpisu
+![Opis obrazu](wpis.png) 
+- Strona została zabezpieczona i po przejsciu w nią na innej przeglądarce nie ma mozliwosci 
+dodania nowego wpisu
