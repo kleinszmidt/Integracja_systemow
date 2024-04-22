@@ -129,3 +129,9 @@ Po zapisaniu pliku i przejściu na adres:  http://127.0.0.1:8000/ wygląda tak:
 I widok strony jest następujący: 
 ![Opis obrazu](html.png)
 
+- Zapisanie zmian w historii i wrzucenie na GitHuba
+- Przesłanie nowej wersji kodu na PythonAnywhere i ponowne załadowanie strony
+wpisanie w terminalu Bash `cd ~/dzuls.pythonanywhere.com`
+i `git pull` wygląda tak: 
+![Opis obrazu](dzuls.png)
+
