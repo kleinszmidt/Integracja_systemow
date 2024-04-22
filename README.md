@@ -143,3 +143,26 @@ interaktywnej konsoli Django
 `Post.objects.all()` lista wpisów wygląda następująco: 
 ![Opis obrazu](wpisy.png)
 - Tworzymy nowy obiekt Post w bazie danych: 
+`Post.objects.create(author=me, title='Sample title', text='Test')`, 
+ale musimy zaimportować `>>> from django.contrib.auth.models import User`
+sprawdzamy jakich użytkowników mamy w bazie `>>> User.objects.all()`
+tak to wygląda razem z nowym postem na liście:
+![Opis obrazu](obiekt.png)
+- W szablonie blog/templates/blog/post_list.html- wpisujemy w body następujący kod:
+```
+<div>
+    <h1><a href="/">Django Girls Blog</a></h1>
+</div>
+
+{% for post in posts %}
+    <div>
+        <p>published: {{ post.published_date }}</p>
+        <h2><a href="">{{ post.title }}</a></h2>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+{% endfor %} 
+```
+![Opis obrazu](szablonu.png)
+
+- 
+
